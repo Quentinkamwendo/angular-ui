@@ -1,0 +1,56 @@
+<div class="container mx-auto p-6">
+  <mat-card class="p-6">
+    <form [formGroup]="itemsForm" (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <mat-form-field class="w-full">
+          <input
+            matInput
+            placeholder="Item Name"
+            formControlName="item_name"
+            (input)="onTyping()"
+          />
+        </mat-form-field>
+      </div>
+      <div class="mb-4">
+        <mat-form-field class="w-full">
+          <textarea
+            matInput
+            placeholder="Description"
+            formControlName="description"
+            (input)="onTyping()"
+          >
+          </textarea>
+        </mat-form-field>
+      </div>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!itemsForm.valid"
+      >
+        Add Item
+      </button>
+    </form>
+  </mat-card>
+  <mat-card class="mt-6 p-6">
+    <h2 class="text-lg font-bold">Items List</h2>
+    <div *ngFor="let item of items" class="mb-2 p-4 border-b">
+      <p class="font-bold">{{ item.item_name }}</p>
+      <p>{{ item.description }}</p>
+      <button
+        mat-flat-button
+        color="warn"
+        (click)="delete(item.id)"
+        type="button"
+      >
+        <mat-icon>delete</mat-icon> delete
+      </button>
+    </div>
+  </mat-card>
+
+  <mat-card class="mt-6 p-6">
+    <div *ngIf="isTyping" class="text-green-500">
+      {{ typingUserId }} or {{ username }} is typing...
+    </div>
+  </mat-card>
+</div>
