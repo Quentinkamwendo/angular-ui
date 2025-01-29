@@ -7,10 +7,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { map, Observable, shareReplay } from 'rxjs';
 import { AccountService } from './services/account.service';
 import { LoginComponent } from './login/login.component';
+import { User } from './_models/user';
 
 @Component({
   selector: 'app-root',
@@ -30,16 +31,18 @@ import { LoginComponent } from './login/login.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent implements OnInit{
+export class AppComponent {
   title = 'ui';
-  user: any;
-  // constructor(private breakpointObserver: BreakpointObserver) {}
+  user$: Observable<User | null>;
+  constructor(private accountService: AccountService, private router: Router) { 
+    this.user$ = this.accountService.user;
+   }
   private breakpointObserver = inject(BreakpointObserver);
-  private accountService = inject(AccountService);
+  // private accountService = inject(AccountService);
 
-  ngOnInit(): void {
-  this.user = this.accountService.userValue;
-  }
+  // ngOnInit(): void {
+  // this.user = this.accountService.userValue;
+  // }
 
   logout() {
     this.accountService.logout()

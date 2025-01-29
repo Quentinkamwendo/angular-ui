@@ -56,6 +56,7 @@ export class LoginComponent {
             this.loginForm.reset();
             this.snackbar.open('Logged in successfully', 'Close', {
               duration: 3000,
+              verticalPosition: 'top',
             });
             this.router.navigate(['/items']);
           },
