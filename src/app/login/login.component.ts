@@ -10,9 +10,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AccountService } from '../services/account.service';
 import { first } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -24,12 +26,16 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     MatSnackBarModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
+    CommonModule,
+    RouterModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
   loginForm!: FormGroup;
+  isLoading: boolean = false;
   constructor(
     private accountService: AccountService,
     private fb: FormBuilder,
@@ -48,6 +54,7 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
+      this.isLoading = true;
       this.accountService
         .login(this.f['email'].value, this.f['password'].value)
         .pipe(first())

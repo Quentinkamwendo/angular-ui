@@ -10,7 +10,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { Router, RouterModule } from '@angular/router';
 import { map, Observable, shareReplay } from 'rxjs';
 import { AccountService } from './services/account.service';
-import { LoginComponent } from './login/login.component';
 import { User } from './_models/user';
 
 @Component({
@@ -26,7 +25,6 @@ import { User } from './_models/user';
     AsyncPipe,
     RouterModule,
     MatMenuModule,
-    LoginComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -54,4 +52,12 @@ export class AppComponent {
       map((result) => result.matches),
       shareReplay()
     );
+
+  isAuthenticated() {
+    if (this.user$) {
+      this.router.navigate(['/items']);
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
 }

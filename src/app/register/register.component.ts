@@ -11,8 +11,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { first } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AccountService } from '../services/account.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -23,6 +25,9 @@ import { AccountService } from '../services/account.service';
     MatCardModule,
     MatButtonModule,
     MatSnackBarModule,
+    RouterModule,
+    MatProgressSpinnerModule,
+    CommonModule,
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
@@ -30,6 +35,7 @@ import { AccountService } from '../services/account.service';
 })
 export class RegisterComponent {
   registerForm!: FormGroup;
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -47,6 +53,7 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
+      this.isLoading = true;
       this.accountService
         .register(this.registerForm.value)
         .pipe(first())
