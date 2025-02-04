@@ -33,6 +33,22 @@ export class AccountService {
     return this.http.post<User>('/api/user', user);
   }
 
+  getUser(id: string) {
+    return this.http.get<User>(`/api/user/${id}`);
+  }
+
+  getAllUsers() {
+    return this.http.get<User[]>('/api/user');
+  }
+
+  deleteUser(id: string) {
+    return this.http.delete(`/api/user/${id}`);
+  }
+
+  updateUser(id: string, user: User) {
+    return this.http.put<User>(`/api/user/${id}`, user);
+  }
+
   logout() {
     sessionStorage.removeItem('user');
     this.userSubject.next(null);

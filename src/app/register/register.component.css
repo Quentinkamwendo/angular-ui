@@ -1,0 +1,9 @@
+.register-link {
+    color: rgb(88, 120, 224);
+    font-weight: 400;
+}
+
+.register-link:hover {
+    color: rgb(89, 125, 245);
+    font-weight: 500;
+}

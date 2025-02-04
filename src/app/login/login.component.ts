@@ -40,12 +40,13 @@ export class LoginComponent {
     private accountService: AccountService,
     private fb: FormBuilder,
     private router: Router,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
+
   }
 
   get f() {

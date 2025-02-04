@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-card-header><mat-card-title>Register</mat-card-title></mat-card-header>
+  <mat-card-header><mat-card-title>{{ title }}</mat-card-title></mat-card-header>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <mat-card-content>
       <mat-form-field class="w-full">
@@ -18,13 +18,17 @@
     <mat-card-actions>
       <button mat-raised-button color="primary">
         <span *ngIf="!isLoading">Register</span>
-        <mat-spinner *ngIf="isLoading" diameter="20" [strokeWidth]="2"></mat-spinner>
+        <mat-spinner
+          *ngIf="isLoading"
+          diameter="20"
+          [strokeWidth]="2"
+        ></mat-spinner>
       </button>
     </mat-card-actions>
-    <mat-card-actions>
-      <p class="register-link">
-        Already have an account? 
-        <a [routerLink]="['/login']">Log In</a>
+    <mat-card-actions *ngIf="!id">
+      <p>
+        Already have an account?
+        <a class="register-link" [routerLink]="['/login']">Log In</a>
       </p>
     </mat-card-actions>
   </form>
