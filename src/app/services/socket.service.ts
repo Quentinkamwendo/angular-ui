@@ -7,7 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class SocketService {
 
-  constructor(private socket: Socket) { }
+  constructor(private socket: Socket) {  }
+
+
+  updateToken() {
+    const token = JSON.parse(sessionStorage.getItem('user')!);
+    this.socket.ioSocket.io.opts.query = { token };
+    // this.socket.disconnect()
+    this.socket.connect(); // Reconnect with the new token
+  }
 
   createItem(item: any) {
     this.socket.emit('createItem', item);

@@ -15,6 +15,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
+import { SocketService } from '../services/socket.service';
 
 @Component({
   selector: 'app-login',
@@ -38,6 +39,7 @@ export class LoginComponent {
   isLoading: boolean = false;
   constructor(
     private accountService: AccountService,
+    private socketService: SocketService,
     private fb: FormBuilder,
     private router: Router,
     private snackbar: MatSnackBar,
@@ -61,6 +63,7 @@ export class LoginComponent {
         .pipe(first())
         .subscribe({
           next: () => {
+            this.socketService.updateToken();
             this.loginForm.reset();
             this.snackbar.open('Logged in successfully', 'Close', {
               duration: 3000,

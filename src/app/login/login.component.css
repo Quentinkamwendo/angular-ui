@@ -7,3 +7,24 @@
     color: rgb(89, 125, 245);
     font-weight: 500;
 }
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f5f5f5; /* Light gray background */
+  }
+  
+  .login-card {
+    width: 100%;
+    max-width: 400px; /* Set max width */
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .action-container {
+    display: flex;
+    justify-content: center;
+  }
+  

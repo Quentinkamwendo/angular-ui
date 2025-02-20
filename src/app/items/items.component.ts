@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { SocketService } from '../services/socket.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-items',
@@ -24,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    MatSnackBarModule
   ],
   templateUrl: './items.component.html',
   styleUrl: './items.component.css',
@@ -35,7 +37,7 @@ export class ItemsComponent implements OnInit {
   typingUserId: string | null = null;
   username: string | null = null;
 
-  constructor(private socketService: SocketService, private fb: FormBuilder) {
+  constructor(private socketService: SocketService, private fb: FormBuilder, private snackbar: MatSnackBar) {
     this.itemsForm = this.fb.group({
       item_name: ['', Validators.required],
       description: ['', Validators.required],
@@ -43,9 +45,7 @@ export class ItemsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.socketService.getAllItems().subscribe((items) => {
-      this.items = items;
-    });
+    this.getItems();
 
     this.socketService.onItemCreated().subscribe((item) => {
       this.items.push(item);
@@ -55,6 +55,12 @@ export class ItemsComponent implements OnInit {
       this.typingUserId = data.userId;
       this.isTyping = data.typing;
       this.username = data.username;
+    });
+  }
+
+  getItems() {
+    this.socketService.getAllItems().subscribe((items) => {
+      this.items = items;
     });
   }
 
@@ -68,6 +74,9 @@ export class ItemsComponent implements OnInit {
 
   delete(id: string) {
     this.socketService.remove(id);
+    this.snackbar.open('Item deleted successfully', 'Close', {
+      duration: 3000,
+    });
     this.socketService.getAllItems().subscribe((items) => {
       this.items = items;
     });
