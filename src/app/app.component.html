@@ -10,13 +10,17 @@
     >
       <mat-toolbar>Menu</mat-toolbar>
       <mat-nav-list>
-        <a mat-list-item routerLink="items">Items</a>
-        <a mat-list-item routerLink="register"
-          >Register<mat-icon>register</mat-icon></a
-        >
+        <a mat-list-item routerLink="items">
+          <span>Items</span>
+          <mat-icon class="p-1">list</mat-icon>
+        </a>
+        <a mat-list-item routerLink="register">
+          <span>Register</span>
+          <mat-icon>user</mat-icon>
+        </a>
         <a mat-list-item routerLink="/users">
           <span>Users</span>
-          <mat-icon>group</mat-icon>
+          <mat-icon class="p-1">group</mat-icon>
         </a>
       </mat-nav-list>
     </mat-sidenav>
