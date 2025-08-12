@@ -24,7 +24,7 @@ export class AccountService {
    }
 
   login(email: string, password: string) {
-    return this.http.post<any>(`/${this.apiUrl}/auth/login`, { email, password }).pipe(map(user => {
+    return this.http.post<any>(`${this.apiUrl}/auth/login`, { email, password }).pipe(map(user => {
       sessionStorage.setItem('user', JSON.stringify(user.access_token));
       this.userSubject.next(user);
       return user;
@@ -32,23 +32,23 @@ export class AccountService {
   }
 
   register(user: User) {
-    return this.http.post<User>(`/${this.apiUrl}/user`, user);
+    return this.http.post<User>(`${this.apiUrl}/user`, user);
   }
 
   getUser(id: string) {
-    return this.http.get<User>(`/${this.apiUrl}/user/${id}`);
+    return this.http.get<User>(`${this.apiUrl}/user/${id}`);
   }
 
   getAllUsers() {
-    return this.http.get<User[]>(`/${this.apiUrl}/user`);
+    return this.http.get<User[]>(`${this.apiUrl}/user`);
   }
 
   deleteUser(id: string) {
-    return this.http.delete(`/${this.apiUrl}/user/${id}`);
+    return this.http.delete(`${this.apiUrl}/user/${id}`);
   }
 
   updateUser(id: string, user: User) {
-    return this.http.put<User>(`/${this.apiUrl}/user/${id}`, user);
+    return this.http.put<User>(`${this.apiUrl}/user/${id}`, user);
   }
 
   logout() {
