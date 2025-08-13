@@ -11,7 +11,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './helpers/auth.interceptor';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
-const API_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://nestjs-api-psi.vercel.app';
+const API_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://nestjs-api-3lgw.onrender.com';
 const user = sessionStorage.getItem('user');
 const token = user ? JSON.parse(user) : null;
 
