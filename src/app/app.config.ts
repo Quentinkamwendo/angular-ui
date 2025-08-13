@@ -11,11 +11,12 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './helpers/auth.interceptor';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
+const API_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://nestjs-api-psi.vercel.app';
 const user = sessionStorage.getItem('user');
 const token = user ? JSON.parse(user) : null;
 
 const config: SocketIoConfig = {
-  url: 'http://localhost:3000',
+  url: API_BASE_URL,
   options: { query: { token } },
   // options: { query: { token: JSON.parse(sessionStorage.getItem('user')!) } },
 };
