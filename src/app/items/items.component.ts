@@ -25,7 +25,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   templateUrl: './items.component.html',
   styleUrl: './items.component.css',
@@ -37,7 +37,11 @@ export class ItemsComponent implements OnInit {
   typingUserId: string | null = null;
   username: string | null = null;
 
-  constructor(private socketService: SocketService, private fb: FormBuilder, private snackbar: MatSnackBar) {
+  constructor(
+    private socketService: SocketService,
+    private fb: FormBuilder,
+    private snackbar: MatSnackBar
+  ) {
     this.itemsForm = this.fb.group({
       item_name: ['', Validators.required],
       description: ['', Validators.required],
